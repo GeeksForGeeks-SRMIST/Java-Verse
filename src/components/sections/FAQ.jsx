@@ -1,17 +1,12 @@
-import React from 'react';
-import Section from '../layout/Section';
-import Container from '../layout/Container';
-
-const FAQ = () => {
+export default function FAQ() {
     return (
-        <Section id="faq">
-            <Container>
-                <h2 className="text-4xl font-bold mb-12 text-center">FAQ</h2>
-                {/* FAQ items will go here */}
-                <p className="text-center text-gray-400">Frequently Asked Questions loading...</p>
-            </Container>
-        </Section>
+        <section id="faq" className="min-h-screen flex flex-col items-center justify-center bg-white text-black px-4">
+            <h2 className="text-5xl md:text-7xl font-bold tracking-tight mb-4">
+                FAQ
+            </h2>
+            <p className="text-xl md:text-2xl text-gray-600 font-light">
+                Frequently Asked Questions
+            </p>
+        </section>
     );
-};
-
-export default FAQ;
+}

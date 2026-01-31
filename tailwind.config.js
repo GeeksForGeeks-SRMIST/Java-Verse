@@ -1,23 +1,25 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-    content: [
-        "./index.html",
-        "./src/**/*.{js,ts,jsx,tsx}",
-    ],
+    content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
     theme: {
         extend: {
             colors: {
-                primary: "#1a202c", // Placeholder
-                secondary: "#2d3748", // Placeholder
-                accent: "#38b2ac", // Placeholder
-            },
-            fontFamily: {
-                sans: ['Inter', 'sans-serif'],
-            },
-            backgroundImage: {
-                'hero-pattern': "url('/assets/hero-bg.svg')", // Placeholder
+                royal: {
+                    black: '#09090b',
+                    purple: '#6b21a8',
+                    accent: '#a855f7',
+                },
+                gold: {
+                    DEFAULT: '#FFD700',
+                    dim: '#BFA100',
+                    glow: '#FFA500',
+                },
+                orange: {
+                    DEFAULT: '#F97316',
+                    bright: '#FF5722',
+                }
             }
         },
     },
     plugins: [],
-}
+};

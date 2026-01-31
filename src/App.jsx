@@ -1,21 +1,24 @@
-import React from 'react';
-import Navbar from './components/common/Navbar';
-import Hero from './components/sections/Hero';
-import Timeline from './components/sections/Timeline';
-import FAQ from './components/sections/FAQ';
-import Footer from './components/common/Footer';
+import Navbar from "./components/common/Navbar";
+import Hero from "./components/sections/Hero";
+import About from "./components/sections/About";
+import Guest from "./components/sections/Guest";
+import Timeline from "./components/sections/Timeline";
+import Sponsors from "./components/sections/Sponsors";
+import FAQ from "./components/sections/FAQ";
+import Footer from "./components/common/Footer";
 
 function App() {
     return (
-        <div className="min-h-screen bg-primary text-white font-sans">
+        <main className="bg-black min-h-screen">
             <Navbar />
-            <main>
-                <Hero />
-                <Timeline />
-                <FAQ />
-            </main>
+            <Hero />
+            <About />
+            <Guest />
+            <Timeline />
+            <Sponsors />
+            <FAQ />
             <Footer />
-        </div>
+        </main>
     );
 }
 
