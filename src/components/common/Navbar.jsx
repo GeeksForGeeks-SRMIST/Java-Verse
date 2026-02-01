@@ -10,14 +10,28 @@ const REGISTRATION_URL = "#";
 
 const Navbar = () => {
     const [isScrolled, setIsScrolled] = useState(false);
+    const [isMobile, setIsMobile] = useState(false);
 
     useEffect(() => {
         const handleScroll = () => {
             setIsScrolled(window.scrollY > 50);
         };
+
+        const handleResize = () => {
+            setIsMobile(window.innerWidth < 768);
+        };
+
         window.addEventListener("scroll", handleScroll);
+        window.addEventListener("resize", handleResize);
+
+        // Initial checks
         handleScroll();
-        return () => window.removeEventListener("scroll", handleScroll);
+        handleResize();
+
+        return () => {
+            window.removeEventListener("scroll", handleScroll);
+            window.removeEventListener("resize", handleResize);
+        };
     }, []);
 
     const navLinks = [
@@ -47,7 +61,7 @@ const Navbar = () => {
                 className={`pointer-events-auto flex items-center justify-between rounded-full 
                 bg-black/60 backdrop-blur-md border border-purple-500/50
                 shadow-[0_0_20px_rgba(168,85,247,0.4)] py-3 overflow-hidden
-                ${isScrolled ? "px-2" : "px-4"}`}
+                ${isScrolled || isMobile ? "px-2" : "px-4"}`}
                 transition={{ type: "spring", stiffness: 120, damping: 20 }}
                 style={{ minWidth: "fit-content" }}
             >
@@ -61,7 +75,7 @@ const Navbar = () => {
                         />
 
                         <AnimatePresence>
-                            {!isScrolled && (
+                            {!isScrolled && !isMobile && (
                                 <motion.div
                                     variants={textLogoVar}
                                     initial="hidden"
@@ -82,7 +96,7 @@ const Navbar = () => {
 
                 {/* Nav Links - Collapsible */}
                 <AnimatePresence>
-                    {!isScrolled && (
+                    {!isScrolled && !isMobile && (
                         <motion.div
                             variants={collapseVar}
                             initial="hidden"
