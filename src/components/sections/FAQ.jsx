@@ -55,7 +55,7 @@ export default function Faq() {
     >
       {/* ===== HEADING ===== */}
       <div className="text-center mb-14">
-        <h2 className="text-5xl sm:text-6xl md:text-7xl font-extrabold text-black tracking-tight">
+        <h2 className="text-4xl sm:text-6xl md:text-7xl font-extrabold text-black tracking-tight">
           FAQs
         </h2>
 
@@ -83,9 +83,8 @@ export default function Faq() {
               </span>
 
               <span
-                className={`text-xl font-bold text-gray-500 transition-transform duration-300 ${
-                  openIndex === i ? "rotate-45" : ""
-                }`}
+                className={`text-xl font-bold text-gray-500 transition-transform duration-300 ${openIndex === i ? "rotate-45" : ""
+                  }`}
               >
                 +
               </span>
@@ -95,10 +94,9 @@ export default function Faq() {
             <div
               className={`
                 overflow-hidden transition-all duration-500 px-5
-                ${
-                  openIndex === i
-                    ? "max-h-40 opacity-100 pb-4"
-                    : "max-h-0 opacity-0"
+                ${openIndex === i
+                  ? "max-h-40 opacity-100 pb-4"
+                  : "max-h-0 opacity-0"
                 }
               `}
             >

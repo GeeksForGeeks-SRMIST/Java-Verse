@@ -11,6 +11,7 @@ const REGISTRATION_URL = "#";
 const Navbar = () => {
     const [isScrolled, setIsScrolled] = useState(false);
     const [isMobile, setIsMobile] = useState(false);
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
 
     useEffect(() => {
         const handleScroll = () => {
@@ -117,18 +118,67 @@ const Navbar = () => {
                     )}
                 </AnimatePresence>
 
-                {/* Register Button */}
-                <div className="flex items-center flex-shrink-0 pl-2">
-                    <a
-                        href={REGISTRATION_URL}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-extrabold text-sm tracking-wider uppercase px-6 py-3 rounded-full shadow-[0_0_15px_rgba(147,51,234,0.6)] hover:shadow-[0_0_25px_rgba(147,51,234,0.8)] hover:scale-105 transition-all duration-300 whitespace-nowrap"
+                {/* Register Button - Desktop/Tablet */}
+                {!isMobile && (
+                    <div className="flex items-center flex-shrink-0 pl-2">
+                        <a
+                            href={REGISTRATION_URL}
+                            target="_blank"
+                            rel="noreferrer"
+                            className="bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-extrabold text-sm tracking-wider uppercase px-6 py-3 rounded-full shadow-[0_0_15px_rgba(147,51,234,0.6)] hover:shadow-[0_0_25px_rgba(147,51,234,0.8)] hover:scale-105 transition-all duration-300 whitespace-nowrap"
+                        >
+                            Register Now
+                        </a>
+                    </div>
+                )}
+
+                {/* Mobile Menu Toggle */}
+                {isMobile && (
+                    <button
+                        onClick={() => setIsMenuOpen(!isMenuOpen)}
+                        className="p-2 text-white hover:text-purple-400 transition-colors pointer-events-auto"
                     >
-                        Register Now
-                    </a>
-                </div>
+                        <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            {isMenuOpen ? (
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                            ) : (
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16m-7 6h7" />
+                            )}
+                        </svg>
+                    </button>
+                )}
             </motion.div>
+
+            {/* Mobile Menu Tray */}
+            <AnimatePresence>
+                {isMobile && isMenuOpen && (
+                    <motion.div
+                        initial={{ opacity: 0, y: -20, scale: 0.95 }}
+                        animate={{ opacity: 1, y: 0, scale: 1 }}
+                        exit={{ opacity: 0, y: -20, scale: 0.95 }}
+                        className="absolute top-20 left-4 right-4 bg-black/90 backdrop-blur-xl border border-purple-500/50 rounded-2xl p-6 shadow-2xl pointer-events-auto flex flex-col gap-4"
+                    >
+                        {navLinks.map((link) => (
+                            <a
+                                key={link.label}
+                                href={link.href}
+                                onClick={() => setIsMenuOpen(false)}
+                                className="text-lg font-bold tracking-widest uppercase text-white hover:text-purple-400 py-2 border-b border-white/5"
+                            >
+                                {link.label}
+                            </a>
+                        ))}
+                        <a
+                            href={REGISTRATION_URL}
+                            target="_blank"
+                            rel="noreferrer"
+                            className="mt-4 bg-gradient-to-r from-purple-600 to-indigo-600 text-white text-center font-extrabold text-lg tracking-wider uppercase py-4 rounded-xl"
+                        >
+                            Register Now
+                        </a>
+                    </motion.div>
+                )}
+            </AnimatePresence>
         </nav>
     );
 };
