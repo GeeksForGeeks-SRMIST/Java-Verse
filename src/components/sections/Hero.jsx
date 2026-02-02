@@ -187,7 +187,7 @@ export default function Hero() {
             <div className={`relative z-10 flex flex-col items-center px-4 pt-32 transition-all duration-1000 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
 
                 {/* Main Title */}
-                <h1 className="relative text-7xl sm:text-8xl md:text-9xl lg:text-[12rem] font-black tracking-tighter text-center mb-6">
+                <h1 className="relative text-5xl sm:text-8xl md:text-9xl lg:text-[12rem] font-black tracking-tighter text-center mb-6">
                     <span className="relative inline-block">
                         <span className="absolute inset-0 blur-3xl bg-white/30" />
                         <span className="relative bg-gradient-to-b from-white via-gray-100 to-gray-500 bg-clip-text text-transparent drop-shadow-2xl">
@@ -197,7 +197,7 @@ export default function Hero() {
                     <span className="relative inline-block ml-3 md:ml-6">
                         <span className="absolute inset-0 blur-3xl bg-white/20" />
                         <span className="relative" style={{
-                            WebkitTextStroke: '3px white',
+                            WebkitTextStroke: '2px white',
                             WebkitTextFillColor: 'transparent',
                             filter: 'drop-shadow(0 0 20px rgba(255,255,255,0.3))'
                         }}>
@@ -207,7 +207,7 @@ export default function Hero() {
                 </h1>
 
                 {/* Subtitle */}
-                <p className="text-xl md:text-2xl lg:text-3xl text-gray-400 font-light tracking-[0.4em] uppercase mb-12 text-center">
+                <p className="text-base sm:text-xl md:text-2xl lg:text-3xl text-gray-400 font-light tracking-[0.2em] sm:tracking-[0.4em] uppercase mb-12 text-center">
                     Code • Create • Conquer
                 </p>
 

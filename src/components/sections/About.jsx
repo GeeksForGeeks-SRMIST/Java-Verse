@@ -36,7 +36,7 @@ export default function About() {
             <div className="relative z-10 max-w-6xl mx-auto px-6 w-full">
                 {/* Section Header */}
                 <div className={`text-center mb-16 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-                    <h2 className="text-5xl sm:text-6xl md:text-7xl font-black tracking-tight mb-4">
+                    <h2 className="text-4xl sm:text-6xl md:text-7xl font-black tracking-tight mb-4">
                         ABOUT
                     </h2>
                     <div className="w-20 h-1 bg-black mx-auto" />

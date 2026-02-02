@@ -34,32 +34,31 @@ export default function Timeline() {
       <div className="blob blob3"></div>
 
       {/* HEADING */}
-    <div className="text-center mb-12 relative z-10">
-    <h2 className="text-5xl sm:text-6xl md:text-7xl font-extrabold text-black tracking-tight">
-      TIMELINE
-  </h2>
-    {/* UNDERLINE BAR */}
-  <div className="w-20 h-1 bg-black mx-auto mt-4 rounded"></div>
+      <div className="text-center mb-12 relative z-10">
+        <h2 className="text-5xl sm:text-6xl md:text-7xl font-extrabold text-black tracking-tight">
+          TIMELINE
+        </h2>
+        {/* UNDERLINE BAR */}
+        <div className="w-20 h-1 bg-black mx-auto mt-4 rounded"></div>
 
-  <p className="text-gray-500 mt-3 text-sm sm:text-base tracking-widest">
-    11th February 2026
-  </p>
-</div>
+        <p className="text-gray-500 mt-3 text-sm sm:text-base tracking-widest">
+          11th February 2026
+        </p>
+      </div>
 
 
       {/* CENTER LINE */}
-      <div className="absolute left-1/2 top-44 bottom-8 w-[1.5px] bg-gray-300 -translate-x-1/2 z-10"></div>
+      <div className="absolute left-8 md:left-1/2 top-44 bottom-8 w-[1.5px] bg-gray-300 -translate-x-1/2 z-10"></div>
 
-      <div className="relative max-w-5xl mx-auto flex flex-col gap-8 md:gap-10 z-10">
+      <div className="relative max-w-5xl mx-auto flex flex-col gap-8 md:gap-10 z-10 px-4 md:px-0">
         {events.map((event, index) => {
           const isLeft = index % 2 === 0;
 
           return (
             <div
               key={index}
-              className={`flow-item opacity-0 translate-y-6 transition-all duration-700 flex items-center ${
-                isLeft ? "justify-start" : "justify-end"
-              }`}
+              className={`flow-item opacity-0 translate-y-6 transition-all duration-700 flex items-center ${isLeft ? "md:justify-start" : "md:justify-end"
+                } justify-start pl-12 md:pl-0`}
             >
               {/* CARD */}
               <div
@@ -69,14 +68,13 @@ export default function Timeline() {
                   rounded-xl px-5 py-3
                   shadow-sm hover:shadow-xl hover:-translate-y-1
                   transition-all duration-300
-                  ${isLeft ? "mr-auto" : "ml-auto"}
+                  ${isLeft ? "md:mr-auto" : "md:ml-auto"}
                 `}
               >
                 {/* SIDE BAR */}
                 <div
-                  className={`absolute top-0 bottom-0 w-1 ${
-                    isLeft ? "left-0" : "right-0"
-                  } bg-black/70 rounded`}
+                  className={`absolute top-0 bottom-0 w-1 ${isLeft ? "left-0" : "md:right-0 left-0"
+                    } bg-black/70 rounded`}
                 ></div>
 
                 <p className="text-xs text-gray-500 font-semibold">
@@ -88,7 +86,7 @@ export default function Timeline() {
               </div>
 
               {/* BADGE */}
-              <div className="absolute left-1/2 -translate-x-1/2 w-9 h-9 bg-black text-white rounded-full flex items-center justify-center text-sm font-bold shadow">
+              <div className="absolute left-8 md:left-1/2 -translate-x-1/2 w-9 h-9 bg-black text-white rounded-full flex items-center justify-center text-sm font-bold shadow">
                 {index + 1}
               </div>
             </div>
