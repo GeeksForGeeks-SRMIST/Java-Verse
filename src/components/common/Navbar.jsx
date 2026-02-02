@@ -1,186 +1,234 @@
 import React, { useState, useEffect } from "react";
-import { motion, AnimatePresence, LayoutGroup } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
+import { Menu, X, ExternalLink, Terminal } from "lucide-react";
 
-// Import logos (Update paths as needed)
+// Import logos
 import GfgLogo from "../../assets/gfg-logo.webp";
 import GfgTextLogo from "../../assets/geeksforgeeks.webp";
 
-// Update with Java-Verse link
-const REGISTRATION_URL = "#";
+// Updated Registration Link
+const REGISTRATION_URL =
+  "https://unstop.com/o/HxJma1b?lb=ppzxy8T5&utm_medium=Share&utm_source=mrinapau6940&utm_campaign=Workshops";
 
 const Navbar = () => {
-    const [isScrolled, setIsScrolled] = useState(false);
-    const [isMobile, setIsMobile] = useState(false);
-    const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-    useEffect(() => {
-        const handleScroll = () => {
-            setIsScrolled(window.scrollY > 50);
-        };
-
-        const handleResize = () => {
-            setIsMobile(window.innerWidth < 768);
-        };
-
-        window.addEventListener("scroll", handleScroll);
-        window.addEventListener("resize", handleResize);
-
-        // Initial checks
-        handleScroll();
-        handleResize();
-
-        return () => {
-            window.removeEventListener("scroll", handleScroll);
-            window.removeEventListener("resize", handleResize);
-        };
-    }, []);
-
-    const navLinks = [
-        { href: "#about", label: "About" },
-        { href: "#guest", label: "Guest" },
-        { href: "#timeline", label: "Timeline" },
-        { href: "#sponsors", label: "Sponsors" },
-        { href: "#faq", label: "FAQs" },
-    ];
-
-    // Variants for collapsible sections
-    // Animating width/padding to 0 smooths out the "shrink" effect
-    const collapseVar = {
-        hidden: { width: 0, opacity: 0, paddingLeft: 0, paddingRight: 0, scale: 0.9 },
-        visible: { width: "auto", opacity: 1, paddingLeft: "2rem", paddingRight: "2rem", scale: 1 }
+  useEffect(() => {
+    const handleScroll = () => {
+      // Trigger collapse slightly earlier for better responsiveness
+      setIsScrolled(window.scrollY > 30);
     };
 
-    const textLogoVar = {
-        hidden: { width: 0, opacity: 0, marginLeft: 0 },
-        visible: { width: "auto", opacity: 1, marginLeft: "0.5rem" }
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 1024); // Adjusted breakpoint for tablet safety
     };
 
-    return (
-        <nav className="fixed top-8 left-1/2 -translate-x-1/2 z-50 w-full max-w-5xl px-4 flex justify-center pointer-events-none">
-            <motion.div
-                layout
-                className={`pointer-events-auto flex items-center justify-between rounded-full 
-                bg-black/60 backdrop-blur-md border border-purple-500/50
-                shadow-[0_0_20px_rgba(168,85,247,0.4)] py-3 overflow-hidden
-                ${isScrolled || isMobile ? "px-2" : "px-4"}`}
-                transition={{ type: "spring", stiffness: 120, damping: 20 }}
-                style={{ minWidth: "fit-content" }}
-            >
-                {/* Logo Section */}
-                <div className="flex items-center flex-shrink-0">
-                    <a href="#home" className="flex items-center gap-2 group px-2">
-                        <img
-                            src={GfgLogo}
-                            alt="Logo"
-                            className="w-10 h-10 object-contain flex-shrink-0 group-hover:scale-110 transition-transform duration-300"
-                        />
+    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("resize", handleResize);
 
-                        <AnimatePresence>
-                            {!isScrolled && !isMobile && (
-                                <motion.div
-                                    variants={textLogoVar}
-                                    initial="hidden"
-                                    animate="visible"
-                                    exit="hidden"
-                                    className="overflow-hidden flex items-center border-r border-white/10 pr-4 whitespace-nowrap"
-                                >
-                                    <img
-                                        src={GfgTextLogo}
-                                        alt="GFG"
-                                        className="h-6 object-contain brightness-200"
-                                    />
-                                </motion.div>
-                            )}
-                        </AnimatePresence>
-                    </a>
-                </div>
+    // Initial checks
+    handleScroll();
+    handleResize();
 
-                {/* Nav Links - Collapsible */}
-                <AnimatePresence>
-                    {!isScrolled && !isMobile && (
-                        <motion.div
-                            variants={collapseVar}
-                            initial="hidden"
-                            animate="visible"
-                            exit="hidden"
-                            className="flex items-center justify-center gap-8 overflow-hidden whitespace-nowrap"
-                        >
-                            {navLinks.map((link) => (
-                                <a
-                                    key={link.label}
-                                    href={link.href}
-                                    className="text-sm font-bold tracking-widest uppercase text-white hover:text-purple-400 hover:drop-shadow-[0_0_8px_rgba(168,85,247,0.8)] transition-all duration-300"
-                                >
-                                    {link.label}
-                                </a>
-                            ))}
-                        </motion.div>
-                    )}
-                </AnimatePresence>
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
 
-                {/* Register Button - Desktop/Tablet */}
-                {!isMobile && (
-                    <div className="flex items-center flex-shrink-0 pl-2">
-                        <a
-                            href={REGISTRATION_URL}
-                            target="_blank"
-                            rel="noreferrer"
-                            className="bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-extrabold text-sm tracking-wider uppercase px-6 py-3 rounded-full shadow-[0_0_15px_rgba(147,51,234,0.6)] hover:shadow-[0_0_25px_rgba(147,51,234,0.8)] hover:scale-105 transition-all duration-300 whitespace-nowrap"
-                        >
-                            Register Now
-                        </a>
-                    </div>
-                )}
+  const navLinks = [
+    { href: "#about", label: "About" },
+    { href: "#guest", label: "Guest" },
+    { href: "#timeline", label: "Timeline" },
+    { href: "#sponsors", label: "Sponsors" },
+    { href: "#community", label: "Community" },
 
-                {/* Mobile Menu Toggle */}
-                {isMobile && (
-                    <button
-                        onClick={() => setIsMenuOpen(!isMenuOpen)}
-                        className="p-2 text-white hover:text-purple-400 transition-colors pointer-events-auto"
-                    >
-                        <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            {isMenuOpen ? (
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                            ) : (
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16m-7 6h7" />
-                            )}
-                        </svg>
-                    </button>
-                )}
-            </motion.div>
+    { href: "#faq", label: "FAQ" },
+  ];
 
-            {/* Mobile Menu Tray */}
+  // --- ANIMATION VARIANTS ---
+  const navContainerVariants = {
+    expanded: {
+      width: "100%",
+      maxWidth: "64rem", // max-w-5xl
+      padding: "0.75rem 1.5rem",
+      borderRadius: "9999px",
+      borderColor: "rgba(255, 255, 255, 0.1)",
+    },
+    collapsed: {
+      width: "fit-content",
+      padding: "0.5rem 0.75rem",
+      borderRadius: "2rem",
+      borderColor: "rgba(177, 44, 62, 0.4)", // Blood Red border when collapsed
+    },
+  };
+
+  const linkContainerVariants = {
+    hidden: { width: 0, opacity: 0, scale: 0.8 },
+    visible: {
+      width: "auto",
+      opacity: 1,
+      scale: 1,
+      transition: { staggerChildren: 0.1, delayChildren: 0.1 },
+    },
+  };
+
+  return (
+    <nav className="fixed top-6 left-1/2 -translate-x-1/2 z-50 w-full px-4 flex justify-center pointer-events-none">
+      <motion.div
+        layout
+        initial="expanded"
+        animate={isScrolled || isMobile ? "collapsed" : "expanded"}
+        variants={navContainerVariants}
+        transition={{ type: "spring", stiffness: 120, damping: 20 }}
+        className="pointer-events-auto bg-verse-dark/80 backdrop-blur-xl border shadow-[0_0_30px_rgba(0,0,0,0.5)] overflow-hidden relative"
+      >
+        {/* Glowing Background Pulse */}
+        <div className="absolute inset-0 bg-gradient-to-r from-blood/10 via-transparent to-toxic-light/10 opacity-50 pointer-events-none" />
+
+        <div className="flex items-center justify-between relative z-10 gap-4">
+          {/* --- LOGO SECTION --- */}
+          <a href="#home" className="flex items-center gap-3 group">
+            <div className="relative">
+              <div className="absolute inset-0 bg-toxic-light blur-md opacity-0 group-hover:opacity-40 transition-opacity duration-300 rounded-full" />
+              <img
+                src={GfgLogo}
+                alt="GFG Logo"
+                className="w-8 h-8 md:w-10 md:h-10 object-contain relative z-10"
+              />
+            </div>
+
             <AnimatePresence>
-                {isMobile && isMenuOpen && (
-                    <motion.div
-                        initial={{ opacity: 0, y: -20, scale: 0.95 }}
-                        animate={{ opacity: 1, y: 0, scale: 1 }}
-                        exit={{ opacity: 0, y: -20, scale: 0.95 }}
-                        className="absolute top-20 left-4 right-4 bg-black/90 backdrop-blur-xl border border-purple-500/50 rounded-2xl p-6 shadow-2xl pointer-events-auto flex flex-col gap-4"
-                    >
-                        {navLinks.map((link) => (
-                            <a
-                                key={link.label}
-                                href={link.href}
-                                onClick={() => setIsMenuOpen(false)}
-                                className="text-lg font-bold tracking-widest uppercase text-white hover:text-purple-400 py-2 border-b border-white/5"
-                            >
-                                {link.label}
-                            </a>
-                        ))}
-                        <a
-                            href={REGISTRATION_URL}
-                            target="_blank"
-                            rel="noreferrer"
-                            className="mt-4 bg-gradient-to-r from-purple-600 to-indigo-600 text-white text-center font-extrabold text-lg tracking-wider uppercase py-4 rounded-xl"
-                        >
-                            Register Now
-                        </a>
-                    </motion.div>
-                )}
+              {!isScrolled && !isMobile && (
+                <motion.div
+                  initial={{ width: 0, opacity: 0, marginLeft: 0 }}
+                  animate={{ width: "auto", opacity: 1, marginLeft: "0.75rem" }}
+                  exit={{ width: 0, opacity: 0, marginLeft: 0 }}
+                  className="overflow-hidden flex items-center border-l border-white/10 pl-3"
+                >
+                  <span className="font-horror text-xl md:text-2xl tracking-widest text-white group-hover:text-toxic-light transition-colors">
+                    JAVA<span className="text-blood">VERSE</span>
+                  </span>
+                </motion.div>
+              )}
             </AnimatePresence>
-        </nav>
-    );
+          </a>
+
+          {/* --- DESKTOP NAVIGATION LINKS --- */}
+          <AnimatePresence>
+            {!isScrolled && !isMobile && (
+              <motion.div
+                variants={linkContainerVariants}
+                initial="hidden"
+                animate="visible"
+                exit="hidden"
+                className="flex items-center gap-1"
+              >
+                {navLinks.map((link) => (
+                  <a
+                    key={link.label}
+                    href={link.href}
+                    className="relative px-4 py-2 text-xs font-mono font-bold tracking-widest uppercase text-gray-400 hover:text-white transition-colors group"
+                  >
+                    <span className="relative z-10">{link.label}</span>
+                    {/* Hover Glitch Effect */}
+                    <span className="absolute inset-0 bg-white/5 rounded-lg scale-0 group-hover:scale-100 transition-transform duration-200" />
+                    <span className="absolute bottom-0 left-2 right-2 h-px bg-toxic-light scale-x-0 group-hover:scale-x-100 transition-transform duration-300" />
+                  </a>
+                ))}
+              </motion.div>
+            )}
+          </AnimatePresence>
+
+          {/* --- ACTION BUTTONS (Right Side) --- */}
+          <div className="flex items-center gap-2">
+            {/* Register Button - Desktop */}
+            {!isMobile && (
+              <motion.a
+                layout
+                href={REGISTRATION_URL}
+                target="_blank"
+                rel="noreferrer"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="hidden sm:flex items-center gap-2 bg-gradient-to-r from-blood to-red-900 text-white font-heading font-bold text-xs md:text-sm tracking-widest uppercase px-6 py-2.5 rounded-full border border-red-500/30 shadow-[0_0_15px_rgba(177,44,62,0.4)] hover:shadow-[0_0_25px_rgba(177,44,62,0.6)] transition-all group"
+              >
+                <span>Initialize</span>
+                <ExternalLink
+                  size={14}
+                  className="group-hover:rotate-45 transition-transform"
+                />
+              </motion.a>
+            )}
+
+            {/* Mobile Menu Toggle */}
+            {isMobile && (
+              <motion.button
+                whileTap={{ scale: 0.9 }}
+                onClick={() => setIsMenuOpen(!isMenuOpen)}
+                className="p-2 text-white hover:text-toxic-light transition-colors bg-white/5 rounded-full border border-white/10"
+              >
+                {isMenuOpen ? <X size={20} /> : <Menu size={20} />}
+              </motion.button>
+            )}
+          </div>
+        </div>
+      </motion.div>
+
+      {/* --- MOBILE MENU DROPDOWN --- */}
+      <AnimatePresence>
+        {isMobile && isMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -20, scale: 0.95, filter: "blur(10px)" }}
+            animate={{ opacity: 1, y: 0, scale: 1, filter: "blur(0px)" }}
+            exit={{ opacity: 0, y: -20, scale: 0.95, filter: "blur(10px)" }}
+            transition={{ type: "spring", stiffness: 200, damping: 25 }}
+            className="absolute top-24 left-4 right-4 bg-verse-dark/95 backdrop-blur-2xl border border-toxic-light/30 rounded-2xl p-6 shadow-2xl pointer-events-auto flex flex-col gap-2 overflow-hidden z-40"
+          >
+            {/* Decorative Background */}
+            <div className="absolute top-0 right-0 w-32 h-32 bg-toxic-light/10 rounded-full blur-3xl pointer-events-none" />
+
+            <div className="flex items-center gap-2 mb-4 text-xs font-mono text-gray-500 uppercase tracking-widest border-b border-white/10 pb-2">
+              <Terminal size={12} /> System Navigation
+            </div>
+
+            {navLinks.map((link, i) => (
+              <motion.a
+                key={link.label}
+                href={link.href}
+                onClick={() => setIsMenuOpen(false)}
+                initial={{ x: -20, opacity: 0 }}
+                animate={{ x: 0, opacity: 1 }}
+                transition={{ delay: i * 0.05 }}
+                className="group flex items-center justify-between p-3 rounded-xl hover:bg-white/5 transition-all border border-transparent hover:border-white/10"
+              >
+                <span className="font-heading font-bold text-lg text-white group-hover:text-toxic-light transition-colors">
+                  {link.label}
+                </span>
+                <span className="text-gray-600 group-hover:text-white transition-colors">
+                  &gt;
+                </span>
+              </motion.a>
+            ))}
+
+            <motion.a
+              initial={{ y: 20, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ delay: 0.3 }}
+              href={REGISTRATION_URL}
+              target="_blank"
+              rel="noreferrer"
+              className="mt-4 bg-blood text-white text-center font-heading font-bold text-lg tracking-widest uppercase py-4 rounded-xl shadow-lg shadow-blood/20 active:scale-95 transition-transform"
+            >
+              Initialize Registration
+            </motion.a>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </nav>
+  );
 };
 
 export default Navbar;
